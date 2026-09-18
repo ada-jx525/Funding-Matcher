@@ -1,5 +1,5 @@
 const MATCHER_API = (() => {
-  const REQUEST_TIMEOUT_MS = 45_000;
+  const REQUEST_TIMEOUT_MS = 120_000;
   const DEMO_STORAGE_KEY = "opportunity-atlas-profiles-v1";
   const LOCAL_HOSTS = new Set(["localhost", "127.0.0.1", "::1", ""]);
   let serviceMode = "unknown";
