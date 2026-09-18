@@ -42,6 +42,10 @@ server and local JSONL profile store are not a production hosting boundary.
 
 Set `web_prototype` as the Vercel project Root Directory and configure:
 
+The build emits the complete static site to `dist/`; `vercel.json` fixes the
+Framework Preset to Other and the Output Directory to `dist`, while the source
+`api/` directory remains the Vercel Functions boundary.
+
 - `HYBRID_API_BASE_URL`: externally hosted production backend implementing
   `/api/profiles`, `/api/matches`, `/api/health` and `/api/ready`. It may share
   the reference adapter's response contract, but must provide bounded request

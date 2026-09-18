@@ -3,7 +3,7 @@
   "private": true,
   "version": "1.0.0",
   "scripts": {
-    "build": "esbuild auth-client-source.js --bundle --minify --platform=browser --format=iife --outfile=auth-client.js",
+    "build": "node build.mjs",
     "pretest": "npm run build",
     "test": "node --test tests/*.test.cjs"
   },
