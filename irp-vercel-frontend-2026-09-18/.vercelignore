@@ -1,0 +1,8 @@
+README.md
+PRODUCTION_READINESS.md
+security_best_practices_report.md
+hybrid_server.py
+public-results-sample.js
+__pycache__/
+*.pyc
+tests/

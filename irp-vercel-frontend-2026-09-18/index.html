@@ -1,0 +1,188 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Find relevant funding and support opportunities for climate innovators.">
+    <meta name="theme-color" content="#f7f8fa">
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Opportunity Atlas">
+    <meta property="og:description" content="Match your organisation with relevant funding and support opportunities.">
+    <meta name="twitter:card" content="summary">
+    <title>Opportunity Atlas</title>
+    <link rel="icon" href="favicon.svg" type="image/svg+xml">
+    <link rel="stylesheet" href="styles.css?v=20260829">
+  </head>
+  <body>
+    <a class="skip-link" href="#matcher">Skip to matcher</a>
+    <header class="site-header">
+      <a class="brand" href="#" aria-label="Opportunity Atlas home">
+        <span class="brand-symbol" aria-hidden="true">O</span>
+        <span>Opportunity Atlas</span>
+      </a>
+      <div class="header-tools">
+        <span class="data-status" id="data-status" role="status">
+          <span class="status-dot" aria-hidden="true"></span>
+          <span id="data-status-label">Connecting</span>
+        </span>
+        <div class="auth-controls" id="auth-controls" hidden>
+          <button class="sign-in-button" id="sign-in-button" type="button">Sign in or create account</button>
+          <div class="account-controls" id="account-controls" hidden>
+            <span class="account-name" id="account-name"></span>
+            <button class="admin-export-button" id="admin-export-button" type="button" hidden>Download profiles CSV</button>
+            <button class="sign-out-button" id="delete-account-data-button" type="button">Delete my saved data</button>
+            <button class="sign-out-button" id="sign-out-button" type="button">Sign out</button>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <main id="matcher">
+      <section class="hero" aria-labelledby="page-title">
+        <p class="eyebrow">International opportunity matching</p>
+        <h1 id="page-title">Find funding that fits.</h1>
+        <p>Match your organisation with relevant funding and support opportunities.</p>
+      </section>
+
+      <section class="match-flow" aria-label="Opportunity search">
+        <div class="flow-step profile-step">
+          <div class="step-content">
+            <div class="step-heading">
+              <div><p class="eyebrow" id="profile-step-kicker">Required</p><h2 id="profile-step-title">Choose a profile</h2></div>
+              <button class="new-profile-button" id="new-profile-button" type="button">
+                <span aria-hidden="true">＋</span>
+                <span>New profile</span>
+              </button>
+            </div>
+
+            <div class="profile-picker" id="profile-picker">
+              <label for="profile-filter">Search profiles</label>
+              <div class="search-input-wrap">
+                <span aria-hidden="true">⌕</span>
+                <input id="profile-filter" type="search" autocomplete="off"
+                  role="combobox" aria-autocomplete="list" aria-haspopup="listbox"
+                  aria-controls="profile-options" aria-expanded="false" aria-activedescendant=""
+                  placeholder="Type a name, location or focus area">
+              </div>
+              <p class="field-help" id="profile-filter-status" aria-live="polite"></p>
+              <p class="profile-data-note" id="profile-data-note" hidden></p>
+              <div class="profile-options" id="profile-options" role="listbox" aria-label="Saved profiles" hidden></div>
+            </div>
+
+            <div class="selected-profile" id="profile-summary"></div>
+            <button class="text-button edit-profile" id="edit-profile-button" type="button">Customise this profile</button>
+          </div>
+        </div>
+
+        <div class="flow-divider" aria-hidden="true"></div>
+
+        <div class="flow-step search-step">
+          <div class="step-content">
+            <div class="step-heading">
+              <div><p class="eyebrow">Optional</p><h2>Search priority</h2></div>
+            </div>
+            <p class="search-guidance">Choose Profile only, or add a topic, region or opportunity type to prioritise.</p>
+            <div class="search-mode" role="radiogroup" aria-label="Search method">
+              <label class="search-mode-option">
+                <input id="search-mode-profile" type="radio" name="search-mode" value="profile" aria-controls="search-focus-field" checked>
+                <span>Profile only</span>
+              </label>
+              <label class="search-mode-option">
+                <input id="search-mode-focus" type="radio" name="search-mode" value="focus" aria-controls="search-focus-field">
+                <span>Add a priority</span>
+              </label>
+            </div>
+            <div class="search-focus-field" id="search-focus-field" hidden>
+              <label for="search-focus">Priority for this search</label>
+              <input id="search-focus" type="text" maxlength="300" autocomplete="off"
+                placeholder="e.g. ocean-monitoring grants in Africa"
+                aria-describedby="search-focus-help search-focus-error">
+              <p id="search-focus-help">Not saved to your profile.</p>
+              <p class="search-focus-error" id="search-focus-error" role="alert" hidden>Enter a priority or choose Profile only.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="match-actions">
+          <div class="result-count-control">
+            <label for="top-k-select">Results</label>
+            <div class="result-count-field">
+              <input id="top-k-select" type="number" min="1" max="30" step="1" value="5"
+                inputmode="numeric" aria-label="Number of results" aria-controls="result-count-options"
+                aria-expanded="false">
+              <button class="result-count-toggle" id="result-count-toggle" type="button"
+                aria-label="Choose number of results" aria-haspopup="listbox"
+                aria-controls="result-count-options" aria-expanded="false">
+                <span aria-hidden="true"></span>
+              </button>
+              <div class="result-count-options" id="result-count-options" role="listbox"
+                aria-label="Suggested result counts" hidden></div>
+            </div>
+          </div>
+          <button class="primary-button" id="match-button" type="button">
+            <span>Find opportunities</span><span aria-hidden="true">→</span>
+          </button>
+        </div>
+      </section>
+
+      <section class="results-section" id="results-section" aria-labelledby="results-title">
+        <div class="results-heading">
+          <div><p class="eyebrow" id="results-kicker">Your shortlist</p><h2 id="results-title">Ready when you are</h2></div>
+          <p id="results-meta" aria-live="polite"></p>
+        </div>
+        <div class="notice" id="app-notice" role="status" aria-live="polite" hidden></div>
+        <div class="results-list" id="results-list" aria-busy="false"></div>
+        <p class="visually-hidden" id="selection-status" role="status" aria-live="polite" aria-atomic="true"></p>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <span>Opportunity Atlas</span>
+      <span>Rankings indicate relevance, not confirmed eligibility. Always verify with the official funder.</span>
+    </footer>
+
+    <dialog class="profile-dialog" id="profile-dialog" aria-labelledby="profile-dialog-title">
+      <form id="profile-form" method="dialog" novalidate>
+        <div class="dialog-header">
+          <div><p class="eyebrow" id="profile-dialog-kicker">Create a saved profile</p><h2 id="profile-dialog-title">Tell us about your work</h2></div>
+          <button class="icon-button" id="close-profile-dialog" type="button" aria-label="Close profile form">×</button>
+        </div>
+        <p class="dialog-copy" id="profile-dialog-copy">Complete the essentials below so the matcher has enough reliable signal.</p>
+
+        <fieldset>
+          <legend>Profile basics</legend>
+          <div class="form-grid">
+            <label class="form-field form-field-wide"><span>Profile name</span><input name="name" autocomplete="organization" required minlength="2" placeholder="Blue Reef Ventures"></label>
+            <label class="form-field"><span>Profile type</span><select name="source_type" required><option value="eso_profile">Support organisation</option><option value="programme_profile">Programme</option></select></label>
+            <label class="form-field"><span id="location-field-label">Organisation location</span><input name="location" autocomplete="country-name" required placeholder="Lisbon, Portugal"></label>
+          </div>
+        </fieldset>
+        <fieldset>
+          <legend>Focus and support</legend>
+          <div class="form-grid">
+            <label class="form-field form-field-wide"><span>Specific focus areas</span><input name="sector_focus" required aria-describedby="sector-focus-help" placeholder="Coral restoration, marine monitoring"><small id="sector-focus-help">Separate specific themes with commas.</small></label>
+            <label class="form-field form-field-wide"><span id="support-field-label">Support offered or needed</span><input name="support_offered" required placeholder="Prototyping, investor introductions"></label>
+            <label class="form-field"><span id="stage-field-label">Development stages</span><input name="support_stages" required placeholder="Pre-Seed, Seed"></label>
+            <label class="form-field"><span id="geography-field-label">Target geographies</span><input name="geographies" required placeholder="Europe, Africa"></label>
+          </div>
+        </fieldset>
+        <fieldset>
+          <legend>About the work</legend>
+          <label class="form-field"><span id="description-field-label">Organisation description</span><textarea name="description" required minlength="30" maxlength="800" rows="4" placeholder="Describe what the organisation or programme does and who it supports."></textarea></label>
+        </fieldset>
+        <div class="form-error" id="profile-form-error" role="alert" tabindex="-1" hidden></div>
+        <div class="dialog-actions">
+          <button class="text-button danger" id="delete-profile-button" type="button" hidden>Delete profile</button>
+          <button class="secondary-button" id="cancel-profile-dialog" type="button">Cancel</button>
+          <button class="primary-button compact" id="save-profile-button" type="submit">Save profile</button>
+        </div>
+      </form>
+    </dialog>
+
+    <script src="auth-client.js?v=20260811"></script>
+    <script src="api-client.js?v=20260820"></script>
+    <script src="data-adapter.js?v=20260817"></script>
+    <script src="renderers.js?v=20260831"></script>
+    <script src="app.js?v=20260811"></script>
+  </body>
+</html>

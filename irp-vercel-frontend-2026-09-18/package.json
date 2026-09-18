@@ -1,0 +1,20 @@
+{
+  "name": "opportunity-atlas-web",
+  "private": true,
+  "version": "1.0.0",
+  "scripts": {
+    "build": "esbuild auth-client-source.js --bundle --minify --platform=browser --format=iife --outfile=auth-client.js",
+    "pretest": "npm run build",
+    "test": "node --test tests/*.test.cjs"
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "dependencies": {
+    "@azure/msal-browser": "4.25.0",
+    "jose": "6.2.3"
+  },
+  "devDependencies": {
+    "esbuild": "0.25.9"
+  }
+}
